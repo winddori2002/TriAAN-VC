@@ -1,8 +1,8 @@
-# MANNER: Multi-view Attention Network for Noise ERasure (ICASSP 2022)
+# TriAAN-VC: Triple Adaptive Attention Normalization for any-to-any Voice Conversion (ICASSP 2023)
 
 This is a Pytorch implementation of [MANNER: Multi-view Attention Network for Noise ERasure](https://arxiv.org/abs/2203.02181). MANNER is a deep learning model for speech enhancement in time-domain. MANNER consists of encoder-decoder based on U-net. Each encoder and decoder contains Up/Down conv, Residual Conformer block, and Multi-view Attention block. MANNER representing full information of the signal efficiently addresses channel and long sequential features. Experimental results on the VoiceBank-DEMAND dataset suggest that MANNER achieves state-of-the-art performance. In addition, among time-domain models, MANNER shows efficient results in terms of inference speed and memory usage.
 
-The overall architecture of MANNER is as below:
+The overall architecture of TriAAN-VC is as below:
 
 <p align="center">
 	<img src="./img/triaan_vc.png" alt="TriAAN-VC" width="90%" height="90%"/>
@@ -10,19 +10,17 @@ The overall architecture of MANNER is as below:
 
 # Installation & Enviornment
 
-The OS, python and pytorch version needs as below:
+The OS, Python, and PyTorch version are as below (You can also use other versions.):
 - Windows
-- Linux 
-- python >= 3.7.4
-- pytorch == 1.7.1
-- torchaudio == 0.7.2
-
-Notice that if you use windows, "tempo" and "speed" augmentation based on sox are not available. You need to use "shift" augmentation.
+- Linux
+- python == 3.8
+- pytorch == 1.9.1
+- torchaudio == 0.9.1
 
 You can install requirements through git and requirements.txt except for pytorch and torchaudio.
 ```C
-git clone https://github.com/winddori2002/MANNER.git
-cd MANNER
+git clone https://github.com/winddori2002/TriAAN-VC.git
+cd TriAAN-VC
 pip install -r requirements.txt
 ```
 
