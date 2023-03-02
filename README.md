@@ -33,6 +33,14 @@ We use the VCTK dataset consisting of 110 speakers with 400 utterances per speak
 - The dataset can be downloaded [here](https://datashare.ed.ac.uk/handle/10283/3443).
 - We divide the dataset depending on seen-to-seen and unseen-to-unseen scenarios for evaluation.
 
+## 2. Prepare pre-trained vocoder and feature extractor
+
+We use the VCTK dataset consisting of 110 speakers with 400 utterances per speaker.
+
+- The dataset can be downloaded [here](https://datashare.ed.ac.uk/handle/10283/3443).
+- We divide the dataset depending on seen-to-seen and unseen-to-unseen scenarios for evaluation.
+
+
 ## 2. Downsample
 
 The sample rate of the dataset is 48kHz.
