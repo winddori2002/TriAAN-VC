@@ -196,6 +196,8 @@ Content       |   **Cell**    |         Cell |
 
 New section   |     More      |         Data |
 And more      | With an escaped '\|'         ||  
+[Prototype table]
+
 
 |Model|WER|CER|SV|-|
 |:---:|:---:|:---:|:---:|:---:|
