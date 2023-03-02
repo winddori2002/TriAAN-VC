@@ -35,11 +35,10 @@ We use the VCTK dataset consisting of 110 speakers with 400 utterances per speak
 
 ## 2. Prepare pre-trained vocoder and feature extractor
 
-We use the VCTK dataset consisting of 110 speakers with 400 utterances per speaker.
+We use the pre-trained ParallelWaveGAN as vocoder and CPC extractor as feature extractor. You can use the pre-trained weights in this repository. The vocoder is trained on the VCTK dataset and CPC extractor is trained on the LibriSpeech dataset.
 
-- The dataset can be downloaded [here](https://datashare.ed.ac.uk/handle/10283/3443).
-- We divide the dataset depending on seen-to-seen and unseen-to-unseen scenarios for evaluation.
-
+- This repository provides pre-trained ParallelWaveGAN provided by [here](https://github.com/Wendison/VQMIVC) and CPC extractor provided by [here](https://github.com/facebookresearch/CPC_audio).
+- Or you can train [ParallelWaveGAN](https://github.com/kan-bayashi/ParallelWaveGAN) and [CPC](https://github.com/facebookresearch/CPC_audio).
 
 ## 2. Downsample
 
