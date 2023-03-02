@@ -182,12 +182,12 @@ We provide randomly selected audio sample pairs in ```./samples```.  Each pair i
 
 # Experimental Results
 
-The above experimental results are from the provided pre-trained weights, and the results can be slightly different from the paper.
+The experimental results are from the provided pre-trained weights, and the results can be slightly different from the paper.
 We divide versions into "VCTK Split" and "VCTK All". "VCTK Split" indicates the pre-trained weight with dataset split as in the paper.
 "VCTK All" means the pre-trained weight using all VCTK dataset. \# uttr indicates the number of target utterances used for conversion.
 
 
-Below, the results are summarized with the TriAAN-VC on the "VCTK Split". Each score is the average of seen-to-seen and unseen-to-unseen scenarios.
+Below, the results are summarized with the "TriAAN-VC-Split". Each score is the average of seen-to-seen and unseen-to-unseen scenarios.
 
 |Model|Pre-trained Ver.|\# uttr|WER AVG (\%)|CER AVG (\%)|SV AVG (\%)|
 |:---|:---:|:---:|:---:|:---:|:---:|
@@ -196,7 +196,7 @@ Below, the results are summarized with the TriAAN-VC on the "VCTK Split". Each s
 |TriAAN-VC-CPC|VCTK Split|1|21.50|11.24|92.33|
 |TriAAN-VC-CPC|VCTK Split|3||||
 
-Below, the results are summarized with the TriAAN-VC on the "VCTK All". Since the model was trained regardless of split setting, the score is only about seen-to-seen scenarios.
+Below, the results are summarized with the "TriAAN-VC-All". Since the model was trained on the whole VCTK dataset regardless of split setting, the score is only about seen-to-seen scenarios.
 
 |Model|Pre-trained Ver.|\# uttr|WER AVG (\%)|CER AVG (\%)|SV AVG (\%)|
 |:---|:---:|:---:|:---:|:---:|:---:|
