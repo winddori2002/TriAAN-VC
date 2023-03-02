@@ -192,7 +192,7 @@ Below, the results are summarized with the "TriAAN-VC-Split". Each score is the 
 |Model|Pre-trained Ver.|\# uttr|WER AVG (\%)|CER AVG (\%)|SV AVG (\%)|
 |:---|:---:|:---:|:---:|:---:|:---:|
 |TriAAN-VC-Mel|VCTK Split|1|27.61|14.78|89.42|
-|TriAAN-VC-Mel|VCTK Split|3||||
+|TriAAN-VC-Mel|VCTK Split|3|22.86|12.15|95.92|
 |TriAAN-VC-CPC|VCTK Split|1|21.50|11.24|92.33|
 |TriAAN-VC-CPC|VCTK Split|3|17.42|8.86|97.75|
 
