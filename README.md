@@ -187,15 +187,8 @@ The above experimental results are from the provided pre-trained weights, and th
 The experimental results and parameter settings of MANNER versions are as below.
 
 
-| Span <td colspan=3>triple  <td colspan=2>double|
-|:---:|:---:|:---:|:---:|:---:|:---:|
-| One    | Two | Three | Four    | Five  | Six|
-
-
-
-
 |Model|WER|CER|SV|
-|:---:|:---:|:---:|:---:|
+|:---:|:---:|:---:|:---:|:---:|
 
 
 
