@@ -192,9 +192,9 @@ Below, the results are summarized with the TriAAN-VC on the "VCTK Split". Each s
 |Model|Pre-trained Ver.|\# uttr|WER AVG (\%)|CER AVG (\%)|SV AVG (\%)|
 |:---|:---:|:---:|:---:|:---:|:---:|
 |TriAAN-VC-Mel|VCTK Split|1|27.61|14.78|89.42|
-|TriAAN-VC-Mel|VCTK Split|3|27.61|14.78|89.42|
-|TriAAN-VC-CPC|VCTK Split|1|3.12|95|4.45|
-|TriAAN-VC-CPC|VCTK Split|3|3.12|95|4.45|
+|TriAAN-VC-Mel|VCTK Split|3||||
+|TriAAN-VC-CPC|VCTK Split|1|21.50|11.24|92.33|
+|TriAAN-VC-CPC|VCTK Split|3||||
 
 Below, the results are summarized with the TriAAN-VC on the "VCTK All". Since the model was trained regardless of split setting, the score is only about seen-to-seen scenarios.
 
