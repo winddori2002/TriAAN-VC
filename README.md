@@ -186,10 +186,17 @@ The above experimental results are from the provided pre-trained weights, and th
 
 The experimental results and parameter settings of MANNER versions are as below.
 
-|Model|WER AVG (\%)|CER AVG (\%)|SV AVG (\%)|
-|:---|:---:|:---:|:---:|
-|TriAAN-VC-Mel|27.61|14.78|89.42|
-|TriAAN-VC-CPC|3.12|95|4.45|
+|Model|Version|\# uttr|WER AVG (\%)|CER AVG (\%)|SV AVG (\%)|
+|:---|:---:|:---:|:---:|:---:|:---:|
+|TriAAN-VC-Mel|Paper ver.|1|27.61|14.78|89.42|
+|TriAAN-VC-Mel|Paper ver.|3|27.61|14.78|89.42|
+|TriAAN-VC-CPC|Paper ver.|1|3.12|95|4.45|
+|TriAAN-VC-CPC|Paper ver.|3|3.12|95|4.45|
+
+|Model|Version|\# uttr|WER AVG (\%)|CER AVG (\%)|SV AVG (\%)|
+|:---|:---:|:---:|:---:|:---:|:---:|
+|TriAAN-VC-Mel|VCTK all|1|27.61|14.78|89.42|
+|TriAAN-VC-CPC|VCTK all|1|3.12|95|4.45|
 
 ## Citation
 
