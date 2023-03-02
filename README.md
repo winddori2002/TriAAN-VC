@@ -189,16 +189,15 @@ The experimental results and parameter settings of MANNER versions are as below.
 
 
 |Model|WER AVG (\%)|CER AVG (\%)|SV AVG (\%)|
-|:---:|:---:|:---:|:---:|
+|:---|:---:|:---:|:---:|
+|TriAAN-VC-Mel|27.61||14.78|89.42|
+|TriAAN-VC-CPC|3.12|95|4.45|
 
 
-
-
-|Model|PESQ|STOI|CSIG|CBAK|COVL|
-|:---:|:---:|:---:|:---:|:---:|:---:|
-|MANNER (small)|3.12|95|4.45|3.61|3.82|
-|MANNER|3.21|95|4.53|3.65|3.91|
-|MANNER (Large)|3.24|95|4.55|3.66|3.94|
+|Model|WER AVG (\%)|CER AVG (\%)|SV AVG (\%)|
+|:---|:---:|:---:|:---:|
+|TriAAN-VC-Mel|27.61||14.78|89.42|
+|TriAAN-VC-CPC|3.12|95|4.45|
 
 ## Citation
 
