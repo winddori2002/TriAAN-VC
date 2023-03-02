@@ -200,10 +200,10 @@ Below, the results are summarized with the "TriAAN-VC-All". Since the model was 
 
 |Model|Pre-trained Ver.|\# uttr|WER AVG (\%)|CER AVG (\%)|SV AVG (\%)|
 |:---|:---:|:---:|:---:|:---:|:---:|
-|TriAAN-VC-Mel|VCTK All|1|27.61|14.78|89.42|
-|TriAAN-VC-Mel|VCTK All|3|27.61|14.78|89.42|
-|TriAAN-VC-CPC|VCTK All|1|3.12|95|4.45|
-|TriAAN-VC-CPC|VCTK All|3|3.12|95|4.45|
+|TriAAN-VC-Mel|VCTK All|1||||
+|TriAAN-VC-Mel|VCTK All|3||||
+|TriAAN-VC-CPC|VCTK All|1||||
+|TriAAN-VC-CPC|VCTK All|3||||
 
 ## Citation
 
