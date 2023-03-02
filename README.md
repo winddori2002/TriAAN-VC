@@ -188,9 +188,6 @@ The experimental results and parameter settings of MANNER versions are as below.
 
 |Model|WER(%)|CER (%)|SV (%)|
 |:---:|S2S|U2U|AVG|S2S|U2U|AVG|S2S|U2U|AVG|
-|MANNER (small)|60|4|8|4|
-|MANNER|60|4|8|4|
-|MANNER (Large)|120|4|8|4|
 
 |Model|PESQ|STOI|CSIG|CBAK|COVL|
 |:---:|:---:|:---:|:---:|:---:|:---:|
