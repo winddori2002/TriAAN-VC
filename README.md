@@ -186,7 +186,8 @@ The above experimental results are from the provided pre-trained weights, and th
 We divide versions into "VCTK Split" and "VCTK All". "VCTK Split" indicates the pre-trained weight with dataset split as in the paper.
 "VCTK All" means the pre-trained weight using all VCTK dataset. \# uttr indicates the number of target utterances used for conversion.
 
-The experimental results and parameter settings of MANNER versions are as below.
+
+Below, the results are summarized with the TriAAN-VC on the "VCTK Split". Each score is the average of seen-to-seen and unseen-to-unseen scenarios.
 
 |Model|Pre-trained Ver.|\# uttr|WER AVG (\%)|CER AVG (\%)|SV AVG (\%)|
 |:---|:---:|:---:|:---:|:---:|:---:|
@@ -194,6 +195,8 @@ The experimental results and parameter settings of MANNER versions are as below.
 |TriAAN-VC-Mel|VCTK Split|3|27.61|14.78|89.42|
 |TriAAN-VC-CPC|VCTK Split|1|3.12|95|4.45|
 |TriAAN-VC-CPC|VCTK Split|3|3.12|95|4.45|
+
+Below, the results are summarized with the TriAAN-VC on the "VCTK All". Since the model was trained regardless of split setting, the score is only about seen-to-seen scenarios.
 
 |Model|Pre-trained Ver.|\# uttr|WER AVG (\%)|CER AVG (\%)|SV AVG (\%)|
 |:---|:---:|:---:|:---:|:---:|:---:|
