@@ -186,7 +186,8 @@ The above experimental results are from the provided pre-trained weights, and th
 
 The experimental results and parameter settings of MANNER versions are as below.
 
-|Model|<td colspan=3>WER |CER (%)|SV (%)|
+|Model <td colspan=3>WER|
+
 
 
 |Model|PESQ|STOI|CSIG|CBAK|COVL|
