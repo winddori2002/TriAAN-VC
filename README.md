@@ -189,7 +189,7 @@ The experimental results and parameter settings of MANNER versions are as below.
 
 
 |             |          Grouping           ||
- ------------ | :-----------: ||
+ ------------ | :-----------: |:-----------: |
 First Header  | Second Header | Third Header |
  ------------ | :-----------: | -----------: |
 Content       |          *Long Cell*        ||
