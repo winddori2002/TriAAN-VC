@@ -35,32 +35,28 @@ We use the VCTK dataset consisting of 110 speakers with 400 utterances per speak
 
 ## 2. Prepare pre-trained vocoder and feature extractor
 
-We use the pre-trained ParallelWaveGAN as vocoder and CPC extractor as feature extractor. You can use the pre-trained weights in this repository. The vocoder is trained on the VCTK dataset and CPC extractor is trained on the LibriSpeech dataset.
+We use the pre-trained ParallelWaveGAN as vocoder and CPC extractor as feature extractor. 
+You can use the pre-trained weights in this repository. 
+The vocoder is trained on the VCTK dataset and CPC extractor is trained on the LibriSpeech dataset.
 
 - This repository provides pre-trained ParallelWaveGAN provided by [here](https://github.com/Wendison/VQMIVC) and CPC extractor provided by [here](https://github.com/facebookresearch/CPC_audio).
 - Or you can train [ParallelWaveGAN](https://github.com/kan-bayashi/ParallelWaveGAN) and [CPC](https://github.com/facebookresearch/CPC_audio).
 
 ## 3. Preprocess
 
-The sample rate of the dataset is 48kHz.
+The preprocess stages contain feature extraction, making data paths, and eval pairs.
 
-For a fair comparison, we downsample the audio files from 48kHz to 16kHz.
+The steps are for VCTK dataset and if you want to use other dataset, you need to modify the details.
 
-- To downsample the audio, run the following code and edit the directories.
+- To get mel-spectrograms, lf0, and metadata, run the following code and modify the directories in the ```./config/preprocess.yaml```.
 
 ```
-python downsampling.py
+python preprocess.py
 ```
-  
-- In the ```downsampleing.py``` script, you should change the contents as follows.
-  
-```
-downsample_rate  = 16000
-clean_train_path = 'The original clean trainset path'
-noisy_train_path = 'The original noisy trainset path'
-clean_test_path  = 'The original clean testset path'
-noisy_test_path  = 'The original noisy testset path'
-resample_path    = 'Resampled path'
+
+- To get cpc features and represent the paths on the metadata, run the following code. (You need pre-trained weights for CPC)
+- ```
+python preprocess_cpc.py
 ```
 
 # How to use
