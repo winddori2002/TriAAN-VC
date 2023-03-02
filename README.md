@@ -40,7 +40,7 @@ We use the pre-trained ParallelWaveGAN as vocoder and CPC extractor as feature e
 - This repository provides pre-trained ParallelWaveGAN provided by [here](https://github.com/Wendison/VQMIVC) and CPC extractor provided by [here](https://github.com/facebookresearch/CPC_audio).
 - Or you can train [ParallelWaveGAN](https://github.com/kan-bayashi/ParallelWaveGAN) and [CPC](https://github.com/facebookresearch/CPC_audio).
 
-## 2. Downsample
+## 3. Preprocess
 
 The sample rate of the dataset is 48kHz.
 
@@ -61,30 +61,6 @@ noisy_train_path = 'The original noisy trainset path'
 clean_test_path  = 'The original clean testset path'
 noisy_test_path  = 'The original noisy testset path'
 resample_path    = 'Resampled path'
-```
-  
-## 3. Make data path files
-
-We make json file consisting of the audio path for loading data efficiently. Train (clean, noisy) and 
-Test (clean, noisy): four json files need to be generated for training. 
-
-The json files will be generated in ```./data_path```.
-
-Notice that the data is downsampled.
-
-- To make json file, run the following code and edit the directories.
-
-```
-python make_datapath.py
-```
-
-- In the ```make_datapath.py```, you should change the contents as follows.
-
-```
-clean_train_path = 'The resampled clean trainset path'
-noisy_train_path = 'The resampled noisy trainset path'
-clean_test_path  = 'The resampled clean testset path'
-noisy_test_path  = 'The resampled noisy testset path'
 ```
 
 # How to use
