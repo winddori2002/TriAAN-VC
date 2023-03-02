@@ -55,8 +55,13 @@ python preprocess.py
 ```
 
 - To get cpc features and represent the paths on the metadata, run the following code. (You need pre-trained weights for CPC)
-- ```
+```
 python preprocess_cpc.py
+```
+
+- To get evaluation pairs for conversion, run the following code.
+```
+python generate_eval_pair.py
 ```
 
 # How to use
