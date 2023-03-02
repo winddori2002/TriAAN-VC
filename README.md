@@ -183,20 +183,24 @@ We provide randomly selected audio sample pairs in ```./samples```.  Each pair i
 # Experimental Results
 
 The above experimental results are from the provided pre-trained weights, and the results can be slightly different from the paper.
+We divide versions into "VCTK Split" and "VCTK All". "VCTK Split" indicates the pre-trained weight with dataset split as in the paper.
+"VCTK All" means the pre-trained weight using all VCTK dataset. \# uttr indicates the number of target utterances used for conversion.
 
 The experimental results and parameter settings of MANNER versions are as below.
 
-|Model|Version|\# uttr|WER AVG (\%)|CER AVG (\%)|SV AVG (\%)|
+|Model|Pre-trained Ver.|\# uttr|WER AVG (\%)|CER AVG (\%)|SV AVG (\%)|
 |:---|:---:|:---:|:---:|:---:|:---:|
-|TriAAN-VC-Mel|Paper ver.|1|27.61|14.78|89.42|
-|TriAAN-VC-Mel|Paper ver.|3|27.61|14.78|89.42|
-|TriAAN-VC-CPC|Paper ver.|1|3.12|95|4.45|
-|TriAAN-VC-CPC|Paper ver.|3|3.12|95|4.45|
+|TriAAN-VC-Mel|VCTK Split|1|27.61|14.78|89.42|
+|TriAAN-VC-Mel|VCTK Split|3|27.61|14.78|89.42|
+|TriAAN-VC-CPC|VCTK Split|1|3.12|95|4.45|
+|TriAAN-VC-CPC|VCTK Split|3|3.12|95|4.45|
 
-|Model|Version|\# uttr|WER AVG (\%)|CER AVG (\%)|SV AVG (\%)|
+|Model|Pre-trained Ver.|\# uttr|WER AVG (\%)|CER AVG (\%)|SV AVG (\%)|
 |:---|:---:|:---:|:---:|:---:|:---:|
-|TriAAN-VC-Mel|VCTK all|1|27.61|14.78|89.42|
-|TriAAN-VC-CPC|VCTK all|1|3.12|95|4.45|
+|TriAAN-VC-Mel|VCTK All|1|27.61|14.78|89.42|
+|TriAAN-VC-Mel|VCTK All|3|27.61|14.78|89.42|
+|TriAAN-VC-CPC|VCTK All|1|3.12|95|4.45|
+|TriAAN-VC-CPC|VCTK All|3|3.12|95|4.45|
 
 ## Citation
 
