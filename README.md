@@ -44,7 +44,7 @@ The vocoder is trained on the VCTK dataset and CPC extractor is trained on the L
 
 ## 3. Preprocess
 
-The preprocess stages contain feature extraction, making data paths, and eval pairs.
+The preprocess stages contain dataset split, feature extraction, making data paths, and eval pairs.
 
 The steps are for VCTK dataset and if you want to use other dataset, you need to modify the details.
 
@@ -54,7 +54,7 @@ The steps are for VCTK dataset and if you want to use other dataset, you need to
 python preprocess.py
 ```
 
-- To get cpc features and represent the paths on the metadata, run the following code. (You need pre-trained weights for CPC)
+- To get CPC features and represent the paths on the metadata, run the following code. (You need pre-trained weights for CPC)
 ```
 python preprocess_cpc.py
 ```
@@ -63,6 +63,9 @@ python preprocess_cpc.py
 ```
 python generate_eval_pair.py
 ```
+
+The dataset split and eval pairs are for evaluation and investigation, they are not actually necessary to train models.
+
 
 # How to use
 
@@ -109,11 +112,10 @@ Augmentation arguments:
 
 The logs are uploaded on [neptune.ai](https://neptune.ai/)
 ```
-python main.py train --logging True --logging_cut -1
+python main.py train --logging True
 
 Logging arguments:
   --logging    : True/False
-  --logging_cut: log after epochs when the epoch is bigger than logging_cut
 ```
 
 ## 2. evaluation
