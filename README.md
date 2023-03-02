@@ -28,10 +28,10 @@ pip install -r requirements.txt
 
 ## 1. Prepare dataset
 
-We use VoiceBank-DEMAND (Valentini) dataset consisting of 28 speakers for training MANNER. 
+We use the VCTK dataset consisting of 110 speakers with 400 utterances per speaker.
 
-- The dataset can be downloaded [here](https://datashare.ed.ac.uk/handle/10283/2791).
-- We use [282,287] speakers as validation set.
+- The dataset can be downloaded [here](https://datashare.ed.ac.uk/handle/10283/3443).
+- We divide the dataset depending on seen-to-seen and unseen-to-unseen scenarios for evaluation.
 
 ## 2. Downsample
 
