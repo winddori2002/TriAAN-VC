@@ -48,7 +48,7 @@ The preprocess stages contain feature extraction, making data paths, and eval pa
 
 The steps are for VCTK dataset and if you want to use other dataset, you need to modify the details.
 
-- To get mel-spectrograms, lf0, and metadata, run the following code and modify the directories in the ```./config/preprocess.yaml```.
+- To split dataset and get mel-spectrograms, lf0, and metadata, run the following code and modify the directories in the ```./config/preprocess.yaml```.
 
 ```
 python preprocess.py
