@@ -2,7 +2,7 @@
 
 This is a Pytorch implementation of [TriAAN-VC: Triple Adaptive Attention Normalization for any-to-any Voice Conversion](https://arxiv.org/abs/2203.02181). TriAAN-VC is a deep learning model for any-to-any voice conversion. TriAAN-VC can maintain the linguistic contents of source speech and represent target characteristics, unlike previous methods. Experimental results on the VCTK dataset suggest that TriAAN-VC achieves state-of-the-art performance. 
 
-We strongly recommend you to visit our [demo site](https://winddori2002.github.io/vc-demo.github.io/).
+We strongly recommend you visit our [demo site](https://winddori2002.github.io/vc-demo.github.io/).
 
 The overall architecture of TriAAN-VC is as below:
 
