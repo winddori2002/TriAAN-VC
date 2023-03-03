@@ -118,27 +118,18 @@ Logging arguments:
   --logging    : True/False
 ```
 
-## 2. evaluation
+## 2. Evaluation
 
 After training, you can evaluate the model in terms of lingustic content (WER and CER) and target characteristic (SV).
 
 You need to keep the model arguments in the training phase.
 ```
-python main.py test --save_enhanced True --enhanced_path []
+python main.py test --n_uttr 1
 
 evaluation arguments:
-  --save_enhanced: saving enhanced audio file
-  --enhanced_path: enhanced file directory
+  --n_uttr:     Number of target utterances for conversion
+  --checkpoint: Checkpoint path
 ```
-
-If you want to evaluate with all measures (PESQ, STOI, CSIG, CBAK, COVL), run the following code.
-```
-python eval_measure.py
-
-clean_path    = 'test clean path'
-enhanced_path = 'enhanced path'
-```
-
 
 ## 3. Pretrained weights
 
