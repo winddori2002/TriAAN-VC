@@ -181,7 +181,7 @@ Below, the results are summarized with the "TriAAN-VC-All". Since the model was 
 |:---|:---:|:---:|:---:|:---:|:---:|
 |TriAAN-VC-Mel|VCTK All|1||||
 |TriAAN-VC-Mel|VCTK All|3||||
-|TriAAN-VC-CPC|VCTK All|1||||
+|TriAAN-VC-CPC|VCTK All|1|20.72|10.62|92.92|
 |TriAAN-VC-CPC|VCTK All|3||||
 
 ## Citation
