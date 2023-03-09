@@ -73,22 +73,16 @@ The dataset split and eval pairs are for evaluation and investigation, they are 
 
 ## 1. Train
 
-### Training with default settings
+### Training with settings
 
-You can train TriAAN-VC with the default setting by running the following code.
+You can train TriAAN-VC by running the following code.
 
-```
-python main.py train
-```
-
-### Training with other arguments
 If you want to edit model settings, you can run ```python main.py train``` with other arguments. 
 
 In ```config/base.yaml```, you can find other arguments, such as batch size, epoch, and so on.
 
-Below, we show some default values of arguments.
-
 ```
+python main.py train
 Model arguments:
   encoder:
   	c_in:      256  (cpc:256, mel:80)
