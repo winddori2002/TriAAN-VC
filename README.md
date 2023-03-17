@@ -116,12 +116,19 @@ Logging arguments:
 
 After training, you can evaluate the model in terms of lingustic content (WER and CER) and target characteristic (SV).
 
-You need to keep the model arguments in the training phase.
+You need to keep the model arguments in the training phase. the code only supports the version in which the number of target utterances is 1.
 ```
-python main.py test --n_uttr 1
-
+python main.py test
 evaluation arguments:
-  --n_uttr:     Number of target utterances for conversion
+  --checkpoint: Checkpoint path
+```
+
+Or, you can use the below code for testing with multi-target utterances.
+```
+python test.py --n_uttr 1 --eval True
+evaluation arguments:
+  --eval:       Option for evaluation
+  --n_uttr:     Number of target utterances
   --checkpoint: Checkpoint path
 ```
 
