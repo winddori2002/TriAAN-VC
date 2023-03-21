@@ -193,13 +193,11 @@ Below, the results are summarized with the "TriAAN-VC-All". The model was traine
 ## Citation
 
 ```
-@inproceedings{park2022manner,
-  title={MANNER: Multi-View Attention Network For Noise Erasure},
-  author={Park, Hyun Joon and Kang, Byung Ha and Shin, Wooseok and Kim, Jin Sob and Han, Sung Won},
-  booktitle={ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
-  pages={7842--7846},
-  year={2022},
-  organization={IEEE}
+@article{park2023triaan,
+  title={TriAAN-VC: Triple Adaptive Attention Normalization for Any-to-Any Voice Conversion},
+  author={Park, Hyun Joon and Yang, Seok Woo and Kim, Jin Sob and Shin, Wooseok and Han, Sung Won},
+  journal={arXiv preprint arXiv:2303.09057},
+  year={2023}
 }
 ```
 
