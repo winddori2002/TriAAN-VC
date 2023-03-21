@@ -203,6 +203,4 @@ Below, the results are summarized with the "TriAAN-VC-All". The model was traine
 
 ## License
 
-This repository is released under the MIT license.
-
-The file ```src/dataset.py``` was adapted from the [facebookresearch/denoiser](https://github.com/facebookresearch/denoiser), released under the CC-BY-NC 4.0. license. We modified the speaker selection in the dataset. The ```src/metrics.py``` was adapted from the [facebookresearch/denoiser](https://github.com/facebookresearch/denoiser) and [santi-pdp/segan_pytorch](https://github.com/santi-pdp/segan_pytorch), where latter was released under the MIT license. The ```src/stft_loss.py``` was adapted from the [facebookresearch/denoiser](https://github.com/facebookresearch/denoiser) and [kan-bayashi/ParallelWaveGAN](https://github.com/kan-bayashi/ParallelWaveGAN), where latter was released under the MIT license.
+This repository is released under the MIT license. We adapted CPC model from [facebookresearch/CPC_audio](https://github.com/facebookresearch/CPC_audio), released under the MIT license. We used vocoder codes from [kan-bayashi/ParallelWaveGAN](https://github.com/kan-bayashi/ParallelWaveGAN), released under the MIT license. For the pre-trained vocoder, we used the weights from [Wendison/VQMIVC](https://github.com/Wendison/VQMIVCtomokui) which is released under the MIT license. We also modified preprocess codes from [Wendison/VQMIVC](https://github.com/Wendison/VQMIVCtomokui).
