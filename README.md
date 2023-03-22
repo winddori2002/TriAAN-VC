@@ -142,6 +142,14 @@ We provide two versions of models depending on input types (mel, cpc).
 
 For custom conversion, you can run the code with ```convert.py```. 
 The codes include data processing, predicting, and vocoding.
+
+```
+python convert.py 
+Conversion arguments:
+  --src_name:   Sample source names with list
+  --trg_name:   Sample target names with list
+  --checkpoint: Checkpoint path
+```
 You can find converted examples in ```./samples``` or please visit our [demo site](https://winddori2002.github.io/vc-demo.github.io/).
 
 # Experimental Results
