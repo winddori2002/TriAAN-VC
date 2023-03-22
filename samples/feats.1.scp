@@ -1,0 +1,3 @@
+from_src_to_trg_cnv ./samples/feats.1.ark:20
+from_src_to_trg_src ./samples/feats.1.ark:134135
+from_src_to_trg_trg ./samples/feats.1.ark:268570

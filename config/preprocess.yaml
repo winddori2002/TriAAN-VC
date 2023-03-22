@@ -1,0 +1,19 @@
+data_path:     /home/winddori/pythondata/voice_conversion/vctk/wav48_silence_trimmed
+txt_path:      /home/winddori/pythondata/voice_conversion/vctk/txt
+spk_info_path: /home/winddori/pythondata/voice_conversion/vctk/speaker-info.txt
+output_path:   ./base_data
+cpc_path:      ./cpc
+sampling_rate: 16000
+top_db:        60
+n_mels:        80
+n_fft:         400
+n_shift:       160
+win_length:    400
+window:        hann
+fmin:          80
+fmax:          7600
+s2s_portion:   0.1
+eval_spks:     10 # we can specify the test speakers
+num_samples:   300 # number of sample pairs
+
+

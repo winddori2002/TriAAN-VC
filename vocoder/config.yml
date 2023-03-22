@@ -1,0 +1,121 @@
+allow_cache: true
+batch_max_steps: 8192
+batch_size: 8
+config: conf/parallel_wavegan.v3.yaml
+dev_dumpdir: dump/dev_all/norm
+dev_feats_scp: null
+dev_segments: null
+dev_wav_scp: null
+discriminator_grad_norm: 1
+discriminator_optimizer_params:
+  eps: 1.0e-06
+  lr: 5.0e-05
+  weight_decay: 0.0
+discriminator_params:
+  channels: 16
+  downsample_pooling: AvgPool1d
+  downsample_pooling_params:
+    count_include_pad: false
+    kernel_size: 4
+    padding: 1
+    stride: 2
+  downsample_scales:
+  - 4
+  - 4
+  - 4
+  - 4
+  in_channels: 1
+  kernel_sizes:
+  - 5
+  - 3
+  max_downsample_channels: 1024
+  nonlinear_activation: LeakyReLU
+  nonlinear_activation_params:
+    negative_slope: 0.2
+  out_channels: 1
+  scales: 3
+  use_weight_norm: true
+discriminator_scheduler_params:
+  gamma: 0.5
+  step_size: 3000000
+discriminator_train_start_steps: 100000
+discriminator_type: MelGANMultiScaleDiscriminator
+distributed: true
+eval_interval_steps: 1000
+fft_size: 400
+fmax: 7600
+fmin: 80
+format: hdf5
+generator_grad_norm: 10
+generator_optimizer_params:
+  eps: 1.0e-06
+  lr: 0.0001
+  weight_decay: 0.0
+generator_params:
+  aux_channels: 80
+  aux_context_window: 2
+  dropout: 0.0
+  gate_channels: 128
+  in_channels: 1
+  kernel_size: 5
+  layers: 30
+  out_channels: 1
+  residual_channels: 64
+  skip_channels: 64
+  stacks: 3
+  upsample_net: ConvInUpsampleNetwork
+  upsample_params:
+    upsample_scales:
+    - 4
+    - 4
+    - 5
+    - 2
+  use_weight_norm: true
+generator_scheduler_params:
+  gamma: 0.5
+  step_size: 3000000
+global_gain_scale: 1.0
+hop_size: 160
+lambda_adv: 4.0
+lambda_feat_match: 25.0
+log_interval_steps: 100
+num_mels: 80
+num_save_intermediate_results: 4
+num_workers: 2
+outdir: exp/train_nodev_all_vctk_parallel_wavegan.v3
+pin_memory: true
+pretrain: ''
+rank: 0
+remove_short_samples: true
+resume: exp/train_nodev_all_vctk_parallel_wavegan.v3/checkpoint-250000steps.pkl
+sampling_rate: 16000
+save_interval_steps: 5000
+stft_loss_params:
+  fft_sizes:
+  - 1024
+  - 2048
+  - 512
+  hop_sizes:
+  - 120
+  - 240
+  - 50
+  win_lengths:
+  - 600
+  - 1200
+  - 240
+  window: hann_window
+train_dumpdir: dump/train_nodev_all/norm
+train_feats_scp: null
+train_max_steps: 3000000
+train_segments: null
+train_wav_scp: null
+trim_frame_size: 2048
+trim_hop_size: 512
+trim_silence: true
+trim_threshold_in_db: 60
+use_feat_match_loss: true
+verbose: 2
+version: 0.4.6
+win_length: 400
+window: hann
+world_size: 2
