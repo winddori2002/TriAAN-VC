@@ -38,7 +38,7 @@ We use the VCTK dataset consisting of 110 speakers with 400 utterances per speak
 ## 2. Prepare pre-trained vocoder and feature extractor
 
 We use the pre-trained ParallelWaveGAN as vocoder and CPC extractor as feature extractor. 
-You can use the pre-trained weights in this repository. 
+You can use the [pre-trained weights in this repository](https://github.com/winddori2002/TriAAN-VC/releases/tag/v1.0). 
 The vocoder is trained on the VCTK dataset and CPC extractor is trained on the LibriSpeech dataset.
 
 - This repository provides pre-trained ParallelWaveGAN provided by [here](https://github.com/Wendison/VQMIVC) and CPC extractor provided by [here](https://github.com/facebookresearch/CPC_audio).
@@ -134,7 +134,7 @@ evaluation arguments:
 
 ## 3. Pretrained weights
 
-The pretrained weights of TriAAN-VC is uploaded on the github release here.
+The pretrained weights of TriAAN-VC is uploaded on the github release [here](https://github.com/winddori2002/TriAAN-VC/releases/tag/v1.0).
 
 We provide two versions of models depending on input types (mel, cpc). 
 
