@@ -146,8 +146,8 @@ The codes include data processing, predicting, and vocoding.
 ```
 python convert.py 
 Conversion arguments:
-  --src_name:   Sample source names with list
-  --trg_name:   Sample target names with list
+  --src_name:   Sample source names
+  --trg_name:   Sample target names
   --checkpoint: Checkpoint path
 ```
 You can find converted examples in ```./samples``` or please visit our [demo site](https://winddori2002.github.io/vc-demo.github.io/).
