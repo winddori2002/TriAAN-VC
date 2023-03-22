@@ -1,6 +1,6 @@
-data_path:     /home/winddori/pythondata/voice_conversion/vctk/wav48_silence_trimmed
-txt_path:      /home/winddori/pythondata/voice_conversion/vctk/txt
-spk_info_path: /home/winddori/pythondata/voice_conversion/vctk/speaker-info.txt
+data_path:     ./vctk/wav48_silence_trimmed
+txt_path:      ./vctk/txt
+spk_info_path: ./vctk/speaker-info.txt
 output_path:   ./base_data
 cpc_path:      ./cpc
 sampling_rate: 16000
