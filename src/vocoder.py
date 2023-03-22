@@ -17,7 +17,7 @@ from tqdm import tqdm
 from src.vocoder_utils import *
 
 class Args:
-    checkpoint       = './vocoder/checkpoint-3000000steps.pkl'
+    checkpoint       = './vocoder/vocoder.pkl'
     verbose          = 1
     dumpdir          = None
     normalize_before = True
