@@ -1,4 +1,4 @@
-# TriAAN-VC: Triple Adaptive Attention Normalization for any-to-any Voice Conversion (ICASSP 2023)
+# TriAAN-VC: Triple Adaptive Attention Normalization for any-to-any Voice Conversion (ICASSP 2023 Top 3% paper recognized)
 
 This is a Pytorch implementation of [TriAAN-VC: Triple Adaptive Attention Normalization for any-to-any Voice Conversion](https://arxiv.org/abs/2303.09057). TriAAN-VC is a deep learning model for any-to-any voice conversion. TriAAN-VC can maintain the linguistic contents of source speech and represent target characteristics, unlike previous methods. Experimental results on the VCTK dataset suggest that TriAAN-VC achieves state-of-the-art performance. 
 
@@ -181,6 +181,10 @@ Below, the results are summarized with the "TriAAN-VC-All". The model was traine
 |TriAAN-VC-Mel|VCTK All|3|22.67|12.08|97.17|
 |TriAAN-VC-CPC|VCTK All|1|20.72|10.62|92.92|
 |TriAAN-VC-CPC|VCTK All|3|16.99|8.55|98.34| -->
+
+## Certificate
+
+Fortunately, our paper was recognized as the top 3% paper in ICASSP 2023.
 
 ## Citation
 
