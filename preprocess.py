@@ -35,8 +35,8 @@ def main(cfg):
 
     wn2info = {}
     for r in results:
-        wav_name, mel, lf0, mel_len, speaker, text = r
-        wn2info[wav_name] = [mel, lf0, mel_len, speaker, text]
+        wav_name, mel, lf0, mel_len, speaker, text, path = r
+        wn2info[wav_name] = [mel, lf0, mel_len, speaker, text, path]
         
     mean, std = ExtractMelstats(wn2info, train_wavs_names, cfg) # only use train wav for normalizing stats
     

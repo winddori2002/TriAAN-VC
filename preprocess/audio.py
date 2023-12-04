@@ -68,7 +68,7 @@ def ProcessingTrainData(path, cfg):
     lf0                   = f0.copy()
     lf0[nonzeros_indices] = np.log(f0[nonzeros_indices]) # for f0(Hz), lf0 > 0 when f0 != 0
     
-    return wav_name, mel, lf0, mel.shape[0], speaker, ''
+    return wav_name, mel, lf0, mel.shape[0], speaker, '', ''
 
 def ProcessingTrainDataHF(data, cfg):
     
@@ -115,7 +115,7 @@ def ProcessingTrainDataHF(data, cfg):
     lf0                   = f0.copy()
     lf0[nonzeros_indices] = np.log(f0[nonzeros_indices]) # for f0(Hz), lf0 > 0 when f0 != 0
     
-    return wav_name, mel, lf0, mel.shape[0], speaker, text
+    return wav_name, mel, lf0, mel.shape[0], speaker, text, path
 
 
 def LoadWav(path, cfg):
@@ -306,12 +306,11 @@ def SplitDatasetHF(all_spks, cfg):
         spk_wavs_names  = [os.path.basename(p).split('.')[0] for p in spk_wavs]
         test_wavs_names += spk_wavs_names
     
-    all_wavs = [(i['path'], i['sentence']) for i in dataset]
+    all_wavs = [('/'.join([cfg.data_path, i['path']]), i['sentence']) for i in dataset]
     
     print(f'Total files: {len(all_wavs)}, Train: {len(train_wavs_names)}, Valid: {len(valid_wavs_names)}, Test: {len(test_wavs_names)}, Del Files: {len(all_wavs)-len(train_wavs_names)-len(valid_wavs_names)-len(test_wavs_names)}')
     
     return all_wavs, train_wavs_names, valid_wavs_names, test_wavs_names
-
 
 def GetMetaResults(train_results, valid_results, test_results, cfg):
     """
@@ -467,7 +466,6 @@ def GetMetaResultsHF(train_results, valid_results, test_results, cfg):
                 
     return train_results, valid_results, test_results
 
-
 def ExtractMelstats(wn2info, train_wavs_names, cfg):
     
     mels = []
@@ -486,8 +484,11 @@ def ExtractMelstats(wn2info, train_wavs_names, cfg):
 
 def SaveFeatures(wav_name, info, mode, cfg):
     
-    mel, lf0, mel_len, speaker, text = info
-    wav_path      = f'{cfg.data_path}/{speaker}/{wav_name}.flac' # can change to special char *
+    mel, lf0, mel_len, speaker, text, path = info
+    if len(path) > 0:
+        wav_path = path
+    else:
+        wav_path      = f'{cfg.data_path}/{speaker}/{wav_name}.flac' # can change to special char *
     mel_save_path = f'{cfg.output_path}/{mode}/mels/{speaker}/{wav_name}.npy'
     lf0_save_path = f'{cfg.output_path}/{mode}/lf0/{speaker}/{wav_name}.npy'
     
