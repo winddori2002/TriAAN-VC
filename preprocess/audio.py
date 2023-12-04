@@ -21,6 +21,7 @@ from glob import glob
 from tqdm import tqdm
 import resampy
 import pyworld as pw
+from datasets import load_dataset
 
 from preprocess.spectrogram import logmelspectrogram
 
@@ -30,7 +31,7 @@ def ProcessingTrainData(path, cfg):
         For multiprocess function binding load wav and log-mel 
     """
     wav_name = os.path.basename(path).split('.')[0]
-    speaker  = wav_name.split('_')[0]
+    speaker  = wav_name.split('-')[0]
     sr       = cfg.sampling_rate
     wav, fs  = sf.read(path)
     wav, _   = librosa.effects.trim(y=wav, top_db=cfg.top_db) # trim slience
@@ -163,6 +164,21 @@ def GetSpeakerInfo(cfg):
     
     return all_spks, gen2spk
 
+def GetSpeakerInfoHF(cfg):
+    
+    dataset = load_dataset(cfg.hf_dataset_path, split=cfg.hf_dataset_split)
+
+    all_spks = dataset.unique('client_id')
+    ds_m = dataset.filter(lambda x: x['gender'] == 'male')
+    ds_f = dataset.filter(lambda x: x['gender'] == 'female')
+    gen2spk = {}
+    gen2spk['M'] = ds_m.unique('client_id')
+    gen2spk['F'] = ds_f.unique('client_id')
+
+    print(f'Total speaker: {len(all_spks)} with Female: {len(gen2spk["F"])} and Male: {len(gen2spk["M"])}')
+
+    return all_spks, gen2spk
+
 def SplitDataset(all_spks, cfg):
     
     all_spks = sorted(all_spks)
@@ -205,6 +221,49 @@ def SplitDataset(all_spks, cfg):
     print(f'Total files: {len(all_wavs)}, Train: {len(train_wavs_names)}, Valid: {len(valid_wavs_names)}, Test: {len(test_wavs_names)}, Del Files: {len(all_wavs)-len(train_wavs_names)-len(valid_wavs_names)-len(test_wavs_names)}')
     
     return all_wavs, train_wavs_names, valid_wavs_names, test_wavs_names
+
+def SplitDatasetHF(all_spks, cfg):
+
+    dataset = load_dataset(cfg.hf_dataset_path, split=cfg.hf_dataset_split)
+
+    all_spks = sorted(all_spks)
+    random.shuffle(all_spks)
+    train_spks = all_spks[:-cfg.eval_spks * 2] # except valid and test unseen speakers
+    valid_spks = all_spks[-cfg.eval_spks * 2:-cfg.eval_spks]
+    test_spks  = all_spks[-cfg.eval_spks:]
+
+    train_wavs_names = []
+    valid_wavs_names = []
+    test_wavs_names  = []
+    
+    for spk in train_spks:
+        spk_wavs       = dataset.filter(lambda x: x['client_id'] == spk)['path']
+        spk_wavs_names = [os.path.basename(p).split('.')[0] for p in spk_wavs]
+        valid_names    = random.sample(spk_wavs_names, int(len(spk_wavs_names) * cfg.s2s_portion))
+        train_names    = [n for n in spk_wavs_names if n not in valid_names]
+        test_names     = random.sample(train_names, int(len(spk_wavs_names) * cfg.s2s_portion))
+        train_names    = [n for n in train_names if n not in test_names]
+
+        train_wavs_names += train_names
+        valid_wavs_names += valid_names
+        test_wavs_names  += test_names
+
+    for spk in valid_spks:
+        spk_wavs         = dataset.filter(lambda x: x['client_id'] == spk)['path']
+        spk_wavs_names   = [os.path.basename(p).split('.')[0] for p in spk_wavs]
+        valid_wavs_names += spk_wavs_names
+
+    for spk in test_spks:
+        spk_wavs        = dataset.filter(lambda x: x['client_id'] == spk)['path']
+        spk_wavs_names  = [os.path.basename(p).split('.')[0] for p in spk_wavs]
+        test_wavs_names += spk_wavs_names
+    
+    all_wavs = dataset['path']
+    
+    print(f'Total files: {len(all_wavs)}, Train: {len(train_wavs_names)}, Valid: {len(valid_wavs_names)}, Test: {len(test_wavs_names)}, Del Files: {len(all_wavs)-len(train_wavs_names)-len(valid_wavs_names)-len(test_wavs_names)}')
+    
+    return all_wavs, train_wavs_names, valid_wavs_names, test_wavs_names
+
 
 def GetMetaResults(train_results, valid_results, test_results, cfg):
     """

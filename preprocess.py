@@ -16,10 +16,16 @@ def main(cfg):
     
     seed_init()
     MakeDir(cfg.output_path)
-    all_spks, gen2spk = GetSpeakerInfo(cfg)
+    if cfg.use_hf:
+        all_spks, gen2spk = GetSpeakerInfoHF(cfg)
+    else:
+        all_spks, gen2spk = GetSpeakerInfo(cfg)
 
     print('---Split dataset---')
-    all_wavs, train_wavs_names, valid_wavs_names, test_wavs_names = SplitDataset(all_spks, cfg)
+    if cfg.use_hf:
+        all_wavs, train_wavs_names, valid_wavs_names, test_wavs_names = SplitDatasetHF(all_spks, cfg)
+    else:
+        all_wavs, train_wavs_names, valid_wavs_names, test_wavs_names = SplitDataset(all_spks, cfg)
 
     print('---Feature extraction---')
     results = Parallel(n_jobs=-1)(delayed(ProcessingTrainData)(wav_path, cfg) for wav_path in tqdm(all_wavs))
