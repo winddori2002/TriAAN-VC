@@ -68,7 +68,55 @@ def ProcessingTrainData(path, cfg):
     lf0                   = f0.copy()
     lf0[nonzeros_indices] = np.log(f0[nonzeros_indices]) # for f0(Hz), lf0 > 0 when f0 != 0
     
-    return wav_name, mel, lf0, mel.shape[0], speaker
+    return wav_name, mel, lf0, mel.shape[0], speaker, ''
+
+def ProcessingTrainDataHF(data, cfg):
+    
+    """
+        For multiprocess function binding load wav and log-mel 
+    """
+    path = data[0]
+    text = data[1]
+    wav_name = os.path.basename(path).split('.')[0]
+    speaker  = wav_name.split('-')[0]
+    sr       = cfg.sampling_rate
+    wav, fs  = sf.read(path)
+    wav, _   = librosa.effects.trim(y=wav, top_db=cfg.top_db) # trim slience
+
+    if fs != sr:
+        wav = resampy.resample(x=wav, sr_orig=fs, sr_new=sr, axis=0)
+        fs  = sr
+        
+    assert fs == 16000, 'Downsampling needs to be done.'
+    
+    peak = np.abs(wav).max()
+    if peak > 1.0:
+        wav /= peak
+        
+    mel = logmelspectrogram(
+                            x=wav,
+                            fs=cfg.sampling_rate,
+                            n_mels=cfg.n_mels,
+                            n_fft=cfg.n_fft,
+                            n_shift=cfg.n_shift,
+                            win_length=cfg.win_length,
+                            window=cfg.window,
+                            fmin=cfg.fmin,
+                            fmax=cfg.fmax
+                            )
+    tlen         = mel.shape[0]
+    frame_period = cfg.n_shift/cfg.sampling_rate*1000
+    
+    f0, timeaxis = pw.dio(wav.astype('float64'), cfg.sampling_rate, frame_period=frame_period)
+    f0           = pw.stonemask(wav.astype('float64'), f0, timeaxis, cfg.sampling_rate)
+    f0           = f0[:tlen].reshape(-1).astype('float32')
+    
+    nonzeros_indices      = np.nonzero(f0)
+    lf0                   = f0.copy()
+    lf0[nonzeros_indices] = np.log(f0[nonzeros_indices]) # for f0(Hz), lf0 > 0 when f0 != 0
+    
+    return wav_name, mel, lf0, mel.shape[0], speaker, text
+
 
 def LoadWav(path, cfg):
     
@@ -258,7 +306,7 @@ def SplitDatasetHF(all_spks, cfg):
         spk_wavs_names  = [os.path.basename(p).split('.')[0] for p in spk_wavs]
         test_wavs_names += spk_wavs_names
     
-    all_wavs = dataset['path']
+    all_wavs = [(i['path'], i['sentence']) for i in dataset]
     
     print(f'Total files: {len(all_wavs)}, Train: {len(train_wavs_names)}, Valid: {len(valid_wavs_names)}, Test: {len(test_wavs_names)}, Del Files: {len(all_wavs)-len(train_wavs_names)-len(valid_wavs_names)-len(test_wavs_names)}')
     
@@ -361,6 +409,65 @@ def GetMetaResults(train_results, valid_results, test_results, cfg):
                 
     return train_results, valid_results, test_results
 
+def GetMetaResultsHF(train_results, valid_results, test_results, cfg):
+    """
+    This is for making additional metadata [txt, text_path, test_type] -1:train, 0:s2s_st, 1:s2s_ut, 2:u2u_st, 3:u2u_ut
+    """
+
+    for i in range(len(train_results)):
+        train_results[i]['test_type'] = 'train'
+      
+    train_spk = set([i['speaker'] for i in train_results])
+    valid_spk = set([i['speaker'] for i in valid_results])
+    test_spk  = set([i['speaker'] for i in test_results])
+
+    train_txt = set([i['text'] for i in train_results])
+    valid_txt = set([i['text'] for i in valid_results])
+    test_txt  = set([i['text'] for i in test_results])
+
+    valid_s2s_spk = train_spk.intersection(valid_spk) 
+    valid_u2u_spk = valid_spk.difference(train_spk).difference(test_spk)
+
+    test_s2s_spk  = train_spk.intersection(test_spk)
+    test_u2u_spk  = test_spk.difference(train_spk).difference(valid_spk)
+
+    valid_s2s_txt = train_txt.intersection(valid_txt) 
+    valid_u2u_txt = valid_txt.difference(train_txt).difference(test_txt)
+
+    test_s2s_txt  = train_txt.intersection(test_txt)
+    test_u2u_txt  = test_txt.difference(train_txt).difference(valid_txt)
+    
+    for i in range(len(valid_results)):
+        
+        spk, txt = valid_results[i]['speaker'], valid_results[i]['text']
+        if spk in valid_s2s_spk:
+            if txt in valid_s2s_txt:
+                valid_results[i]['test_type'] = 's2s_st'
+            else:
+                valid_results[i]['test_type'] = 's2s_ut'
+        else:
+            if txt in valid_s2s_txt:
+                valid_results[i]['test_type'] = 'u2u_st'
+            else:
+                valid_results[i]['test_type'] = 'u2u_ut'
+
+    for i in range(len(test_results)):
+        
+        spk, txt = test_results[i]['speaker'], test_results[i]['text']
+        if spk in test_s2s_spk:
+            if txt in test_s2s_txt:
+                test_results[i]['test_type'] = 's2s_st'
+            else:
+                test_results[i]['test_type'] = 's2s_ut'
+        else:
+            if txt in test_s2s_txt:
+                test_results[i]['test_type'] = 'u2u_st'
+            else:
+                test_results[i]['test_type'] = 'u2u_ut'
+                
+    return train_results, valid_results, test_results
+
+
 def ExtractMelstats(wn2info, train_wavs_names, cfg):
     
     mels = []
@@ -379,7 +486,7 @@ def ExtractMelstats(wn2info, train_wavs_names, cfg):
 
 def SaveFeatures(wav_name, info, mode, cfg):
     
-    mel, lf0, mel_len, speaker = info
+    mel, lf0, mel_len, speaker, text = info
     wav_path      = f'{cfg.data_path}/{speaker}/{wav_name}.flac' # can change to special char *
     mel_save_path = f'{cfg.output_path}/{mode}/mels/{speaker}/{wav_name}.npy'
     lf0_save_path = f'{cfg.output_path}/{mode}/lf0/{speaker}/{wav_name}.npy'
@@ -391,5 +498,5 @@ def SaveFeatures(wav_name, info, mode, cfg):
     
     wav_name = wav_name.split('_mic')[0] # p231_001
 
-    return {'mel_len':mel_len, 'speaker':speaker, 'wav_name':wav_name, 'wav_path':wav_path, 'mel_path':mel_save_path, 'lf0_path':lf0_save_path}
+    return {'mel_len':mel_len, 'speaker':speaker, 'text': text, 'wav_name':wav_name, 'wav_path':wav_path, 'mel_path':mel_save_path, 'lf0_path':lf0_save_path}
     
