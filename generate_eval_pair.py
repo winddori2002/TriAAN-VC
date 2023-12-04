@@ -16,14 +16,14 @@ def GetSpeakerDict(info):
 
 def GeneratePairSample(spk_dic, num_samples):
     
-    s2s_st_pairs = list(permutations(list(spk_dic['s2s_st'].keys()), 2)) # s2s_st pair
-    s2s_st_pairs = random.choices(s2s_st_pairs, k=num_samples)
+    # s2s_st_pairs = list(permutations(list(spk_dic['s2s_st'].keys()), 2)) # s2s_st pair
+    # s2s_st_pairs = random.choices(s2s_st_pairs, k=num_samples)
 
     s2s_ut_pairs = list(permutations(list(spk_dic['s2s_ut'].keys()), 2)) # s2s_ut pair
     s2s_ut_pairs = random.choices(s2s_ut_pairs, k=num_samples)
 
-    u2u_st_pairs = list(permutations(list(spk_dic['u2u_st'].keys()), 2)) # u2u_st pair
-    u2u_st_pairs = random.choices(u2u_st_pairs, k=num_samples)
+    # u2u_st_pairs = list(permutations(list(spk_dic['u2u_st'].keys()), 2)) # u2u_st pair
+    # u2u_st_pairs = random.choices(u2u_st_pairs, k=num_samples)
 
     u2u_ut_pairs = list(permutations(list(spk_dic['u2u_ut'].keys()), 2)) # u2u_ut _pair
     u2u_ut_pairs = random.choices(u2u_ut_pairs, k=num_samples)
@@ -34,29 +34,29 @@ def GeneratePairSample(spk_dic, num_samples):
     u2u_st_x  = 0
     u2u_ut_x  = 0
 
-    for (s2s_st_s, s2s_st_t), (s2s_ut_s, s2s_ut_t), (u2u_st_s, u2u_st_t), (u2u_ut_s, u2u_ut_t) in zip(s2s_st_pairs, s2s_ut_pairs, u2u_st_pairs, u2u_ut_pairs):
+    for (s2s_ut_s, s2s_ut_t), (u2u_ut_s, u2u_ut_t) in zip(s2s_ut_pairs, u2u_ut_pairs):
 
-        info_dict['s2s_st'].append([random.choice(spk_dic['s2s_st'][s2s_st_s]), random.choice(spk_dic['s2s_st'][s2s_st_t])]) # sampling info of the seen source and target speaker
+        # info_dict['s2s_st'].append([random.choice(spk_dic['s2s_st'][s2s_st_s]), random.choice(spk_dic['s2s_st'][s2s_st_t])]) # sampling info of the seen source and target speaker
         info_dict['s2s_ut'].append([random.choice(spk_dic['s2s_ut'][s2s_ut_s]), random.choice(spk_dic['s2s_ut'][s2s_ut_t])])
-        info_dict['u2u_st'].append([random.choice(spk_dic['u2u_st'][u2u_st_s]), random.choice(spk_dic['u2u_st'][u2u_st_t])])
+        # info_dict['u2u_st'].append([random.choice(spk_dic['u2u_st'][u2u_st_s]), random.choice(spk_dic['u2u_st'][u2u_st_t])])
         info_dict['u2u_ut'].append([random.choice(spk_dic['u2u_ut'][u2u_ut_s]), random.choice(spk_dic['u2u_ut'][u2u_ut_t])])   
 
-        s2s_st_unq = [(i[0]['wav_name'], i[1]['wav_name']) for i in info_dict['s2s_st']] # (src wav name, trg wav name)
+        # s2s_st_unq = [(i[0]['wav_name'], i[1]['wav_name']) for i in info_dict['s2s_st']] # (src wav name, trg wav name)
         s2s_ut_unq = [(i[0]['wav_name'], i[1]['wav_name']) for i in info_dict['s2s_ut']]
-        u2u_st_unq = [(i[0]['wav_name'], i[1]['wav_name']) for i in info_dict['u2u_st']]
+        # u2u_st_unq = [(i[0]['wav_name'], i[1]['wav_name']) for i in info_dict['u2u_st']]
         u2u_ut_unq = [(i[0]['wav_name'], i[1]['wav_name']) for i in info_dict['u2u_ut']]
 
         s2s_st_x += 1; s2s_ut_x += 1; u2u_st_x += 1; u2u_ut_x += 1
 
-        while s2s_st_x != len(set(s2s_st_unq)):
-            info_dict['s2s_st'][-1] = [random.choice(spk_dic['s2s_st'][s2s_st_s]), random.choice(spk_dic['s2s_st'][s2s_st_t])]
-            s2s_st_unq = [(i[0]['wav_name'], i[1]['wav_name']) for i in info_dict['s2s_st']]
+        # while s2s_st_x != len(set(s2s_st_unq)):
+        #     info_dict['s2s_st'][-1] = [random.choice(spk_dic['s2s_st'][s2s_st_s]), random.choice(spk_dic['s2s_st'][s2s_st_t])]
+        #     s2s_st_unq = [(i[0]['wav_name'], i[1]['wav_name']) for i in info_dict['s2s_st']]
         while s2s_ut_x != len(set(s2s_ut_unq)):
             info_dict['s2s_ut'][-1] = [random.choice(spk_dic['s2s_ut'][s2s_ut_s]), random.choice(spk_dic['s2s_ut'][s2s_ut_t])]
             s2s_ut_unq = [(i[0]['wav_name'], i[1]['wav_name']) for i in info_dict['s2s_ut']]
-        while u2u_st_x != len(set(u2u_st_unq)):
-            info_dict['u2u_st'][-1] = [random.choice(spk_dic['u2u_st'][u2u_st_s]), random.choice(spk_dic['u2u_st'][u2u_st_t])]
-            u2u_st_unq = [(i[0]['wav_name'], i[1]['wav_name']) for i in info_dict['u2u_st']]
+        # while u2u_st_x != len(set(u2u_st_unq)):
+        #     info_dict['u2u_st'][-1] = [random.choice(spk_dic['u2u_st'][u2u_st_s]), random.choice(spk_dic['u2u_st'][u2u_st_t])]
+        #     u2u_st_unq = [(i[0]['wav_name'], i[1]['wav_name']) for i in info_dict['u2u_st']]
         while u2u_ut_x != len(set(u2u_ut_unq)):
             info_dict['u2u_ut'][-1] = [random.choice(spk_dic['u2u_ut'][u2u_ut_s]), random.choice(spk_dic['u2u_ut'][u2u_ut_t])]
             u2u_ut_unq = [(i[0]['wav_name'], i[1]['wav_name']) for i in info_dict['u2u_ut']]

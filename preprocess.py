@@ -16,18 +16,27 @@ def main(cfg):
     
     seed_init()
     MakeDir(cfg.output_path)
-    all_spks, gen2spk = GetSpeakerInfo(cfg)
+    if cfg.use_hf:
+        all_spks, gen2spk = GetSpeakerInfoHF(cfg)
+    else:
+        all_spks, gen2spk = GetSpeakerInfo(cfg)
 
     print('---Split dataset---')
-    all_wavs, train_wavs_names, valid_wavs_names, test_wavs_names = SplitDataset(all_spks, cfg)
+    if cfg.use_hf:
+        all_wavs, train_wavs_names, valid_wavs_names, test_wavs_names = SplitDatasetHF(all_spks, cfg)
+    else:
+        all_wavs, train_wavs_names, valid_wavs_names, test_wavs_names = SplitDataset(all_spks, cfg)
 
     print('---Feature extraction---')
-    results = Parallel(n_jobs=-1)(delayed(ProcessingTrainData)(wav_path, cfg) for wav_path in tqdm(all_wavs))
+    if cfg.use_hf:
+        results = Parallel(n_jobs=-1)(delayed(ProcessingTrainDataHF)(wav_path, cfg) for wav_path in tqdm(all_wavs))
+    else:
+        results = Parallel(n_jobs=-1)(delayed(ProcessingTrainData)(wav_path, cfg) for wav_path in tqdm(all_wavs))
 
     wn2info = {}
     for r in results:
-        wav_name, mel, lf0, mel_len, speaker = r
-        wn2info[wav_name] = [mel, lf0, mel_len, speaker]
+        wav_name, mel, lf0, mel_len, speaker, text, path = r
+        wn2info[wav_name] = [mel, lf0, mel_len, speaker, text, path]
         
     mean, std = ExtractMelstats(wn2info, train_wavs_names, cfg) # only use train wav for normalizing stats
     
@@ -36,7 +45,10 @@ def main(cfg):
     valid_results = Parallel(n_jobs=-1)(delayed(SaveFeatures)(wav_name, wn2info[wav_name], 'valid', cfg) for wav_name in tqdm(valid_wavs_names))
     test_results  = Parallel(n_jobs=-1)(delayed(SaveFeatures)(wav_name, wn2info[wav_name], 'test', cfg) for wav_name in tqdm(test_wavs_names))
 
-    train_results, valid_results, test_results = GetMetaResults(train_results, valid_results, test_results, cfg)
+    if cfg.use_hf:
+        train_results, valid_results, test_results = GetMetaResultsHF(train_results, valid_results, test_results, cfg)
+    else:
+        train_results, valid_results, test_results = GetMetaResults(train_results, valid_results, test_results, cfg)
     
     print('---Write Infos---')
     Write_json(train_results, f'{cfg.output_path}/train.json')
