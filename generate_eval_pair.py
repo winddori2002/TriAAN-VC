@@ -60,7 +60,13 @@ def GeneratePairSample(spk_dic, num_samples):
         while u2u_ut_x != len(set(u2u_ut_unq)):
             info_dict['u2u_ut'][-1] = [random.choice(spk_dic['u2u_ut'][u2u_ut_s]), random.choice(spk_dic['u2u_ut'][u2u_ut_t])]
             u2u_ut_unq = [(i[0]['wav_name'], i[1]['wav_name']) for i in info_dict['u2u_ut']]
-        
+    
+    # * this block added to remove null tests for seen text tests for other datasets like common voice
+    keys = list(info_dict.keys())
+    for key in keys:
+        if len(info_dict[key]) == 0:
+            info_dict.pop(key)
+
     return info_dict
 
 def AddOraclePath(train_info, valid_info, test_info, info_dict):
