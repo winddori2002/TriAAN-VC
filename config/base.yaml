@@ -35,7 +35,7 @@ model:
 
 train:
   epoch:        500
-  batch_size:   64
+  batch_size:   16
   lr:           1e-4
   loss:         l1
   eval_every:   100

@@ -1,7 +1,7 @@
-data_path: "/media/alireza/561cae52-3535-453a-ab4c-a94c48b9804e/datasets/common_voice_13"
+data_path: "/home/sahragard/datasets/common_voice_13"
 txt_path: ./vctk/txt
 use_hf: True
-hf_dataset_path: "/media/alireza/561cae52-3535-453a-ab4c-a94c48b9804e/datasets/common_voice_13"
+hf_dataset_path: "/home/sahragard/datasets/common_voice_13"
 hf_dataset_split: vc_100
 spk_info_path: ./vctk/speaker-info.txt
 output_path: ./base_data
