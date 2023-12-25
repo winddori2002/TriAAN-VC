@@ -103,7 +103,8 @@ class Trainer:
                 
     def _run_epoch(self, data_loader, valid=False):
         
-        total_loss = 0 
+        total_loss = 0
+        num_batches = len(data_loader)
         for i, batch in enumerate(tqdm(data_loader)):
             
             src_feat = batch['feat'].to(self.cfg.device)
@@ -122,7 +123,8 @@ class Trainer:
                 loss3 = self.criterion(output, output_siam)  # consistency loss between prediction and siam's prediction
                 loss  = (loss1 + loss2) * 0.5 + loss3
 
-            if not valid:
+            if not valid and \
+                ((i+1) % self.cfg.accum_step == 0 or (i+1) == num_batches):
                 self.optimizer.zero_grad()
                 loss.backward()
                 self.optimizer.step()
