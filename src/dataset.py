@@ -88,7 +88,10 @@ class ConversionDataset(Dataset):
         self.speakers  = sorted(os.listdir(self.data_path/f'{mode}/mels'))
         
         metadata       = Read_json(self.data_path/f'{mode}_pair.json')
-        self.metadata  = metadata['s2s_st'] + metadata['s2s_ut'] + metadata['u2u_st'] + metadata['u2u_ut']
+        # self.metadata  = metadata['s2s_st'] + metadata['s2s_ut'] + metadata['u2u_st'] + metadata['u2u_ut']
+        self.metadata = []
+        for key in metadata.keys():
+            self.metadata += metadata[key]
         mel_stats = np.load(cfg.data_path + '/mel_stats.npy')
         self.mean = np.expand_dims(mel_stats[0], -1)
         self.std  = np.expand_dims(mel_stats[1], -1)
@@ -160,7 +163,10 @@ class MultiConversionDataset(Dataset):
         self.speakers  = sorted(os.listdir(self.data_path/f'{mode}/mels'))
         
         metadata       = Read_json(self.data_path/f'{mode}_{cfg.n_uttr}_pair.json')
-        self.metadata  = metadata['s2s_st'] + metadata['s2s_ut'] + metadata['u2u_st'] + metadata['u2u_ut']
+        # self.metadata  = metadata['s2s_st'] + metadata['s2s_ut'] + metadata['u2u_st'] + metadata['u2u_ut']
+        self.metadata = []
+        for key in metadata.keys():
+            self.metadata += metadata[key]
         mel_stats = np.load(cfg.data_path + '/mel_stats.npy')
         self.mean = np.expand_dims(mel_stats[0], -1)
         self.std  = np.expand_dims(mel_stats[1], -1)
@@ -240,8 +246,11 @@ def get_multi_target_meta(cfg, mode='test'):
     output_path = f'{cfg.data_path}/{mode}_{cfg.n_uttr}_pair.json'
     if not os.path.isfile(output_path):
 
-        metadata = pair['s2s_st'] + pair['s2s_ut'] + pair['u2u_st'] + pair['u2u_ut']
-        keys     = ['s2s_st', 's2s_ut', 'u2u_st', 'u2u_ut']
+        # metadata = pair['s2s_st'] + pair['s2s_ut'] + pair['u2u_st'] + pair['u2u_ut']
+        metadata = []
+        for key in pair.keys():
+            metadata += pair[key]
+        keys     = list(pair.keys())
         for k in keys:
             meta = []
             for i in pair[k]:
