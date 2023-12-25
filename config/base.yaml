@@ -1,47 +1,48 @@
-data_path:       ./base_data
-wav_path:        ./vctk/wav48_silence_trimmed
-txt_path:        ./vctk/txt
-spk_info_path:   ./vctk/speaker-info.txt
-converted_path: 
-vocoder_path:    ./vocoder
-cpc_path:        ./cpc
+data_path: ./base_data
+wav_path: ./vctk/wav48_silence_trimmed
+txt_path: ./vctk/txt
+spk_info_path: ./vctk/speaker-info.txt
+converted_path:
+vocoder_path: ./vocoder
+cpc_path: ./cpc
 n_uttr:
 
 setting:
   sampling_rate: 16000
-  top_db:        60
-  n_mels:        80
-  n_fft:         400
-  n_shift:       160
-  win_length:    400
-  window:        hann
-  fmin:          80
-  fmax:          7600
-  s2s_portion:   0.1
-  eval_spks:     10   # we can specify the test speakers
-  n_frames:      128
+  top_db: 60
+  n_mels: 80
+  n_fft: 400
+  n_shift: 160
+  win_length: 400
+  window: hann
+  fmin: 80
+  fmax: 7600
+  s2s_portion: 0.1
+  eval_spks: 10 # we can specify the test speakers
+  n_frames: 128
 
 model:
   encoder:
-      c_in:          256    # mel input: c_in 80, cpc input: c_in 256
-      c_h:           512
-      c_out:         4
-      num_layer:     6
+    c_in: 256 # mel input: c_in 80, cpc input: c_in 256
+    c_h: 512
+    c_out: 4
+    num_layer: 6
   decoder:
-      c_in:          4
-      c_h:           512
-      c_out:         80
-      num_layer:     6
+    c_in: 4
+    c_h: 512
+    c_out: 80
+    num_layer: 6
 
 train:
   epoch:        500
   batch_size:   16
-  lr:           1e-4
-  loss:         l1
-  eval_every:   100
-  save_epoch:   100
-  siam:         true
-  cpc:          true
+  accum_step: 1
+  lr: 1e-4
+  loss: l1
+  eval_every: 100
+  save_epoch: 100
+  siam: true
+  cpc: true
 
 test:
   threshold: 0.6895345449450861 # acquired from vctk dataset
