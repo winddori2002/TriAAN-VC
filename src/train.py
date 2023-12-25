@@ -124,7 +124,7 @@ class Trainer:
                 loss  = (loss1 + loss2) * 0.5 + loss3
 
             if not valid and \
-                ((i+1) % self.cfg.accum_step == 0 or (i+1) == num_batches):
+                ((i+1) % self.cfg.train.accum_step == 0 or (i+1) == num_batches):
                 self.optimizer.zero_grad()
                 loss.backward()
                 self.optimizer.step()
