@@ -123,9 +123,6 @@ class Trainer:
                 loss3 = self.criterion(output, output_siam)  # consistency loss between prediction and siam's prediction
                 loss  = (loss1 + loss2) * 0.5 + loss3
 
-
-            loss.backward()
-
             if not valid:
                 loss.backward()
                 if (i+1) % self.cfg.train.accum_step == 0 or (i+1) == num_batches:
